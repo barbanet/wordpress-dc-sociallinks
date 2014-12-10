@@ -1,0 +1,38 @@
+/* FRONTEND */
+div.sociallinks-container a i.fa {
+    /*color: #1B86D4;*/
+    font-size: 26pt;
+    padding: 3px;
+}
+div.sociallinks-container a i.small {
+    font-size: 14pt;
+}
+div.sociallinks-container a i.large {
+    font-size: 52pt;
+}
+div.sociallinks-container a:hover i.fa-bitbucket-square {
+    color: #205081;
+}
+div.sociallinks-container a:hover i.fa-facebook-square {
+    color: #3A5795;
+}
+div.sociallinks-container a:hover i.fa-github-square {
+    color: #000000;
+}
+div.sociallinks-container a:hover i.fa-google-plus-square {
+    color: #DF4B38;
+}
+div.sociallinks-container a:hover i.fa-linkedin-square {
+    color: #0073B2;
+}
+div.sociallinks-container a:hover i.fa-twitter-square {
+    color: #1AC4FF;
+}
+/* ADMIN */
+td.dc-social-links {
+    width: 20px;
+}
+td.dc-social-links i {
+    padding-top:1px;
+    font-size: 20pt;
+}
