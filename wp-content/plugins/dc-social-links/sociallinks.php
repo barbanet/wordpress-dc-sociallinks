@@ -2,7 +2,7 @@
 /*
 Plugin Name: DC Social links
 Description: Social links to be used into your template.
-Version: 0.1.0
+Version: 0.2.0
 Author: Damián Culotta
 Author URI: http://www.damianculotta.com.ar
 License: GPL3
@@ -40,14 +40,16 @@ class DcSocialLinks extends WP_Widget
         <?php
     }
 
-    public function update($new_instance, $old_instance) {
+    public function update($new_instance, $old_instance)
+    {
         $instance = $old_instance;
         $instance['title'] = sanitize_text_field($new_instance['title']);
         $instance['size'] = $new_instance['size'];
         return $instance;
     }
 
-    public function widget($args, $instance) {
+    public function widget($args, $instance)
+    {
         extract($args);
         $title = apply_filters('widget_title', $instance['title']);
         $size = $instance['size'];
@@ -69,6 +71,7 @@ class DcSocialLinks extends WP_Widget
         $_sociallinks_googleplus = $_sociallinks['googleplus'];
         $_sociallinks_linkedin = $_sociallinks['linkedin'];
         $_sociallinks_twitter = $_sociallinks['twitter'];
+        $_sociallinks_rss = $_sociallinks['rss'];
         
         echo $before_widget;
         echo $before_title;
@@ -93,34 +96,37 @@ class DcSocialLinks extends WP_Widget
         if ($_sociallinks_twitter) {
             echo '<a rel="me" title="Twitter" href="' . $_sociallinks_twitter . '"><i class="fa fa-twitter-square' . $size . '"></i></a>';
         }
+        if ($_sociallinks_rss) {
+            echo '<a title="RSS" href="' . $_sociallinks_rss . '"><i class="fa fa-rss-square' . $size . '"></i></a>';
+        }
         echo '</div>';
         echo $after_widget;
     }
 
 }
 
-function registerDcSocialLinks() {
+function registerDcSocialLinksWidget()
+{
     register_widget('DcSocialLinks');
 }
 
-add_action('widgets_init', 'registerDcSocialLinks');
+add_action('widgets_init', 'registerDcSocialLinksWidget');
 
-function getSocialLinksStyles() {
-    wp_enqueue_style('sociallinks', plugin_dir_url(__FILE__) . 'css/social-links.css');
+function getDcSocialLinksStyles()
+{
+    wp_enqueue_style('dc-social-links', plugin_dir_url(__FILE__) . 'css/social-links.css', false, getDcSocialLinksVersion());
 }
 
-add_action('wp_enqueue_scripts', 'getSocialLinksStyles');
+add_action('wp_enqueue_scripts', 'getDcSocialLinksStyles');
 
 /* ADMIN */
 
-function getDcSocialLinksStyles() {
-    wp_enqueue_style('dc-social-links', plugin_dir_url(__FILE__) . 'css/admin-social-links.css');
-}
-add_action('admin_head', 'getSocialLinksStyles');
+add_action('admin_head', 'getDcSocialLinksStyles');
 
-function getDcSocialLinksAdmin() {
+function getDcSocialLinksAdmin()
+{
     
-    if(!is_plugin_active('dc-fontawesome/fontawesome.php' ) ) {
+    if (!is_plugin_active('dc-fontawesome/fontawesome.php')) {
         ?>
         <div id="message" class="error"><p><strong><?php _e('Plugin Dc FontAwesome is required.') ?></strong></p></div>
         <?php
@@ -188,6 +194,14 @@ function getDcSocialLinksAdmin() {
                         <input type="text" class="regular-text" name="sociallinks[twitter]" value="<?php echo sanitize_text_field($_sociallinks['twitter']); ?>" />
                     </td>
                 </tr>
+                <tr>
+                    <td class="dc-social-links">
+                        <i class="fa fa-rss-square"></i>
+                    </td>
+                    <td>
+                        <input type="text" class="regular-text" name="sociallinks[rss]" value="<?php echo sanitize_text_field($_sociallinks['rss']); ?>" placeholder="<?php echo bloginfo('rss2_url'); ?>" />
+                    </td>
+                </tr>
             </table>
             <p class="submit"><input class="button" type="submit" name="submit" value="<?php _e('Update &raquo;'); ?>" /></p>
         </form>
@@ -195,9 +209,21 @@ function getDcSocialLinksAdmin() {
     <?php
 }
 
-function getDcSocialLinksAdminMenu(){
+function getDcSocialLinksAdminMenu()
+{
     add_options_page('Social Links', 'Social Links', 8, 'sociallinks', 'getDcSocialLinksAdmin');
 }
-add_action('admin_menu', 'getDcSocialLinksAdminMenu'); 
+
+add_action('admin_menu', 'getDcSocialLinksAdminMenu');
+
+function getDcSocialLinksVersion()
+{
+    if (!function_exists('get_plugins')) {
+        require_once(ABSPATH . 'wp-admin/includes/plugin.php');
+    }
+    $plugin_folder = get_plugins('/' . plugin_basename(dirname(__FILE__)));
+    $plugin_file = basename((__FILE__));
+    return $plugin_folder[$plugin_file]['Version'];
+}
 
 ?>
