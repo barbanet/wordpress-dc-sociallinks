@@ -2,7 +2,7 @@
 /*
 Plugin Name: DC Social links
 Description: Social links to be used into your template.
-Version: 0.2.0
+Version: 0.3.0
 Author: Damián Culotta
 Author URI: http://www.damianculotta.com.ar
 License: GPL3
@@ -71,6 +71,7 @@ class DcSocialLinks extends WP_Widget
         $_sociallinks_googleplus = $_sociallinks['googleplus'];
         $_sociallinks_linkedin = $_sociallinks['linkedin'];
         $_sociallinks_twitter = $_sociallinks['twitter'];
+        $_sociallinks_newsletter = $_sociallinks['newsletter'];
         $_sociallinks_rss = $_sociallinks['rss'];
         
         echo $before_widget;
@@ -95,6 +96,9 @@ class DcSocialLinks extends WP_Widget
         }
         if ($_sociallinks_twitter) {
             echo '<a rel="me" title="Twitter" href="' . $_sociallinks_twitter . '"><i class="fa fa-twitter-square' . $size . '"></i></a>';
+        }
+        if ($_sociallinks_newsletter) {
+            echo '<a title="Newsletter" href="' . $_sociallinks_newsletter . '"><i class="fa fa-envelope-square' . $size . '"></i></a>';
         }
         if ($_sociallinks_rss) {
             echo '<a title="RSS" href="' . $_sociallinks_rss . '"><i class="fa fa-rss-square' . $size . '"></i></a>';
@@ -192,6 +196,14 @@ function getDcSocialLinksAdmin()
                     </td>
                     <td>
                         <input type="text" class="regular-text" name="sociallinks[twitter]" value="<?php echo sanitize_text_field($_sociallinks['twitter']); ?>" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="dc-social-links">
+                        <i class="fa fa-envelope-square"></i>
+                    </td>
+                    <td>
+                        <input type="text" class="regular-text" name="sociallinks[newsletter]" value="<?php echo sanitize_text_field($_sociallinks['newsletter']); ?>" />
                     </td>
                 </tr>
                 <tr>

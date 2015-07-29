@@ -28,6 +28,12 @@ div.sociallinks-container a:hover i.fa-linkedin-square {
 div.sociallinks-container a:hover i.fa-twitter-square {
     color: #1AC4FF;
 }
+div.sociallinks-container a:hover i.fa-newsletter-square {
+    color: #52BAD5;
+}
+div.sociallinks-container a:hover i.fa-rss-square {
+    color: #FF8E00;
+}
 /* ADMIN */
 td.dc-social-links {
     width: 20px;
