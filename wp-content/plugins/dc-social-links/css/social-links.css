@@ -28,6 +28,9 @@ div.sociallinks-container a:hover i.fa-linkedin-square {
 div.sociallinks-container a:hover i.fa-twitter-square {
     color: #1AC4FF;
 }
+div.sociallinks-container a:hover i.fa-instagram {
+    color: #E33664;
+}
 div.sociallinks-container a:hover i.fa-newsletter-square {
     color: #52BAD5;
 }
