@@ -2,7 +2,7 @@
 /*
 Plugin Name: DC Social links
 Description: Social links to be used into your template.
-Version: 0.4.0
+Version: 0.5.0
 Author: Damián Culotta
 Author URI: http://www.damianculotta.com.ar
 License: GPL3
@@ -55,13 +55,13 @@ class DcSocialLinks extends WP_Widget
         $size = $instance['size'];
         switch ($size) {
             case 's':
-                $size = ' small';
+                $size = ' fa-lg';
                 break;
             case 'l':
-                $size = ' large';
+                $size = ' fa-5x';
                 break;
             default:
-                $size = '';
+                $size = ' fa-3x';
         }
         
         $_sociallinks = unserialize(get_option('sociallinks'));
@@ -72,6 +72,7 @@ class DcSocialLinks extends WP_Widget
         $_sociallinks_linkedin = $_sociallinks['linkedin'];
         $_sociallinks_twitter = $_sociallinks['twitter'];
         $_sociallinks_instagram = $_sociallinks['instagram'];
+        $_sociallinks_magento = $_sociallinks['magento'];
         $_sociallinks_newsletter = $_sociallinks['newsletter'];
         $_sociallinks_rss = $_sociallinks['rss'];
         
@@ -81,31 +82,34 @@ class DcSocialLinks extends WP_Widget
         echo $after_title;
         echo '<div class="sociallinks-container">';
         if ($_sociallinks_bitbucket) {
-            echo '<a rel="me" title="Bitbucket" href="' . $_sociallinks_bitbucket . '"><i class="fa fa-bitbucket-square' . $size . '"></i></a>';
+            echo '<a rel="me" title="Bitbucket" href="' . $_sociallinks_bitbucket . '"><i class="fab fa-bitbucket' . $size . '"></i></a>';
         }
         if ($_sociallinks_facebook) {
-            echo '<a rel="me" title="Facebook" href="' . $_sociallinks_facebook . '"><i class="fa fa-facebook-square' . $size . '"></i></a>';
+            echo '<a rel="me" title="Facebook" href="' . $_sociallinks_facebook . '"><i class="fab fa-facebook-square' . $size . '"></i></a>';
         }
         if ($_sociallinks_github) {
-            echo '<a rel="me" title="GitHub" href="' . $_sociallinks_github . '"><i class="fa fa-github-square' . $size . '"></i></a>';
+            echo '<a rel="me" title="GitHub" href="' . $_sociallinks_github . '"><i class="fab fa-github-square' . $size . '"></i></a>';
         }
         if ($_sociallinks_googleplus) {
-            echo '<a rel="me" title="Goolge+" href="' . $_sociallinks_googleplus . '"><i class="fa fa-google-plus-square' . $size . '"></i></a>';
+            echo '<a rel="me" title="Goolge+" href="' . $_sociallinks_googleplus . '"><i class="fab fa-google-plus-square' . $size . '"></i></a>';
         }
         if ($_sociallinks_linkedin) {
-            echo '<a rel="me" title="LinkedIn" href="' . $_sociallinks_linkedin . '"><i class="fa fa-linkedin-square' . $size . '"></i></a>';
+            echo '<a rel="me" title="LinkedIn" href="' . $_sociallinks_linkedin . '"><i class="fab fa-linkedin' . $size . '"></i></a>';
         }
         if ($_sociallinks_twitter) {
-            echo '<a rel="me" title="Twitter" href="' . $_sociallinks_twitter . '"><i class="fa fa-twitter-square' . $size . '"></i></a>';
+            echo '<a rel="me" title="Twitter" href="' . $_sociallinks_twitter . '"><i class="fab fa-twitter-square' . $size . '"></i></a>';
         }
         if ($_sociallinks_instagram) {
-            echo '<a rel="me" title="Instagram" href="' . $_sociallinks_instagram . '"><i class="fa fa-instagram' . $size . '"></i></a>';
+            echo '<a rel="me" title="Instagram" href="' . $_sociallinks_instagram . '"><i class="fab fa-instagram' . $size . '"></i></a>';
+        }
+        if ($_sociallinks_magento) {
+            echo '<a rel="me" title="Magento" href="' . $_sociallinks_magento . '"><i class="fab fa-magento' . $size . '"></i></a>';
         }
         if ($_sociallinks_newsletter) {
-            echo '<a title="Newsletter" href="' . $_sociallinks_newsletter . '"><i class="fa fa-envelope-square' . $size . '"></i></a>';
+            echo '<a title="Newsletter" href="' . $_sociallinks_newsletter . '"><i class="fas fa-envelope-square' . $size . '"></i></a>';
         }
         if ($_sociallinks_rss) {
-            echo '<a title="RSS" href="' . $_sociallinks_rss . '"><i class="fa fa-rss-square' . $size . '"></i></a>';
+            echo '<a title="RSS" href="' . $_sociallinks_rss . '"><i class="fas fa-rss-square' . $size . '"></i></a>';
         }
         echo '</div>';
         echo $after_widget;
@@ -156,7 +160,7 @@ function getDcSocialLinksAdmin()
             <table class="form-table" id="dc-social-links">
                 <tr>
                     <td class="dc-social-links">
-                        <i class="fa fa-bitbucket-square"></i>
+                        <i class="fab fa-bitbucket"></i>
                     </td>
                     <td>
                         <input type="text" class="regular-text" name="sociallinks[bitbucket]" value="<?php echo sanitize_text_field($_sociallinks['bitbucket']); ?>" />
@@ -164,7 +168,7 @@ function getDcSocialLinksAdmin()
                 </tr>
                 <tr>
                     <td class="dc-social-links">
-                        <i class="fa fa-facebook-square"></i>
+                        <i class="fab fa-facebook-square"></i>
                     </td>
                     <td>
                         <input type="text" class="regular-text" name="sociallinks[facebook]" value="<?php echo sanitize_text_field($_sociallinks['facebook']); ?>" />
@@ -172,7 +176,7 @@ function getDcSocialLinksAdmin()
                 </tr>
                 <tr>
                     <td class="dc-social-links">
-                        <i class="fa fa-github-square"></i>
+                        <i class="fab fa-github-square"></i>
                     </td>
                     <td>
                         <input type="text" class="regular-text" name="sociallinks[github]" value="<?php echo sanitize_text_field($_sociallinks['github']); ?>" />
@@ -180,7 +184,7 @@ function getDcSocialLinksAdmin()
                 </tr>
                 <tr>
                     <td class="dc-social-links">
-                        <i class="fa fa-google-plus-square"></i>
+                        <i class="fab fa-google-plus-square"></i>
                     </td>
                     <td>
                         <input type="text" class="regular-text" name="sociallinks[googleplus]" value="<?php echo sanitize_text_field($_sociallinks['googleplus']); ?>" />
@@ -188,7 +192,7 @@ function getDcSocialLinksAdmin()
                 </tr> 
                 <tr>
                     <td class="dc-social-links">
-                        <i class="fa fa-linkedin-square"></i>
+                        <i class="fab fa-linkedin"></i>
                     </td>
                     <td>
                         <input type="text" class="regular-text" name="sociallinks[linkedin]" value="<?php echo sanitize_text_field($_sociallinks['linkedin']); ?>" />
@@ -196,7 +200,7 @@ function getDcSocialLinksAdmin()
                 </tr>
                 <tr>
                     <td class="dc-social-links">
-                        <i class="fa fa-twitter-square"></i>
+                        <i class="fab fa-twitter-square"></i>
                     </td>
                     <td>
                         <input type="text" class="regular-text" name="sociallinks[twitter]" value="<?php echo sanitize_text_field($_sociallinks['twitter']); ?>" />
@@ -204,7 +208,7 @@ function getDcSocialLinksAdmin()
                 </tr>
                 <tr>
                     <td class="dc-social-links">
-                        <i class="fa fa-instagram"></i>
+                        <i class="fab fa-instagram"></i>
                     </td>
                     <td>
                         <input type="text" class="regular-text" name="sociallinks[instagram]" value="<?php echo sanitize_text_field($_sociallinks['instagram']); ?>" />
@@ -212,7 +216,15 @@ function getDcSocialLinksAdmin()
                 </tr>
                 <tr>
                     <td class="dc-social-links">
-                        <i class="fa fa-envelope-square"></i>
+                        <i class="fab fa-magento"></i>
+                    </td>
+                    <td>
+                        <input type="text" class="regular-text" name="sociallinks[magento]" value="<?php echo sanitize_text_field($_sociallinks['magento']); ?>" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="dc-social-links">
+                        <i class="fas fa-envelope-square"></i>
                     </td>
                     <td>
                         <input type="text" class="regular-text" name="sociallinks[newsletter]" value="<?php echo sanitize_text_field($_sociallinks['newsletter']); ?>" />
@@ -220,7 +232,7 @@ function getDcSocialLinksAdmin()
                 </tr>
                 <tr>
                     <td class="dc-social-links">
-                        <i class="fa fa-rss-square"></i>
+                        <i class="fas fa-rss-square"></i>
                     </td>
                     <td>
                         <input type="text" class="regular-text" name="sociallinks[rss]" value="<?php echo sanitize_text_field($_sociallinks['rss']); ?>" placeholder="<?php echo bloginfo('rss2_url'); ?>" />
